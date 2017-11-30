@@ -40,7 +40,7 @@ coverage run test/solutions.py && coverage report
 放答案的地方
 
 ### test
-#### soltions
+#### solutions
 
 - 加载 `solutions` 中的所有题解的单元测试，并逐一运行
 - 当且仅当全部测试通过时，解释器以返回值0结束
