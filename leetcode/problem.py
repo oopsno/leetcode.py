@@ -14,10 +14,10 @@ class Tags(enum.Enum):
     Queue, String, Map, HashTable = itertools.repeat(enum.auto, times=4)
     Trees, BinaryTree, BinarySearchTree, Trie = itertools.repeat(enum.auto, times=4)
     Graph, DFS, BFS, TopRecursion = itertools.repeat(enum.auto, times=4)
-    Pointers, TologicalSort, DivideAndConquer, DynamicProgramming = itertools.repeat(enum.auto, times=4)
+    Pointers, TopologicalSort, DivideAndConquer, DynamicProgramming = itertools.repeat(enum.auto, times=4)
     Backtracking, ReservoirSampling, Greedy, Memorization = itertools.repeat(enum.auto, times=4)
     Design, BinarySearch, Sort, BitManipulation = itertools.repeat(enum.auto, times=4)
-    Minimax, Implement, Geometry, Math, Misc = itertools.repeat(enum.auto, times=5)
+    Minimax, Implement, Geometry, Math, TwoPointers, Misc = itertools.repeat(enum.auto, times=6)
 
 
 class Problem:
