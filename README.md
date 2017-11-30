@@ -1,4 +1,4 @@
-# codewars.py
+# leetcode.py
 
 [![Travis](https://img.shields.io/travis/oopsno/leetcode.py.svg?style=flat-square)]()
 [![Code Climate](https://img.shields.io/codeclimate/maintainability/oopsno/leetcode.py.svg?style=flat-square)]()
@@ -6,7 +6,7 @@
 
 ## 简介
 
-这是一个用 [Python][Python] 刷 [CodeWars][LeetCode] 的仓库
+这是一个用 [Python][Python] 刷 [LeetCode][LeetCode] 的仓库
 
 > 反正刷了也找不到工作啊喵...
 
