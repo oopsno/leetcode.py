@@ -42,6 +42,7 @@ class Compile(Action):
         # 输出不带装饰器的 Solution
         for line in solution_lines:
             print(line, end='')
+        return True
 
 
 class Test(Action):
