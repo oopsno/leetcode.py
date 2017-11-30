@@ -24,9 +24,9 @@ def scan_solutions():
 
 
 def for_each_case(handle):
-    for module in scan_solutions():
+    for module in sorted(scan_solutions(), key=lambda m: m.Solution.pid):
         for case in scan_tests(module):
-            handle(case)
+            handle(module.Solution, case)
 
 
 class Run:
@@ -34,10 +34,9 @@ class Run:
         self.runner = unittest.TextTestRunner()
         self.success = True
 
-    def __call__(self, cls: str):
-        show_name = 'LeetCode::{}'.format(cls.__name__)
-        print('Testing: {}'.format(show_name), file=sys.stderr)
-        suite = unittest.defaultTestLoader.loadTestsFromTestCase(cls)
+    def __call__(self, solution, case):
+        print('Challenge {}: {}'.format(solution.pid, solution.name), file=sys.stderr)
+        suite = unittest.defaultTestLoader.loadTestsFromTestCase(case)
         result = self.runner.run(suite)
         self.success &= result.wasSuccessful()
 
@@ -45,7 +44,18 @@ class Run:
         return 0 if self.success else -1
 
 
+class Inject:
+    def __init__(self, namespace: dict):
+        self.namespace = namespace
+
+    def __call__(self, solution, case):
+        # 强制 Unittest 逐 kyu 按字典非减序执行
+        self.namespace[f'{solution.pid}_{solution.name}_{case.__name__}'] = case
+
+
 if __name__ == '__main__':
     run = Run()
     for_each_case(run)
     exit(run.return_code())
+else:
+    for_each_case(Inject(globals()))
