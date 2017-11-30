@@ -27,7 +27,7 @@ class Equal(CodeGen):
         self.type = bool
 
     def codegen(self, indent_level=0) -> str:
-        expr = f'self.assertEqual({self.lhs.codegen()}, {self.rhs.codegen()})'
+        expr = f'self.assertEqual({self.rhs.codegen()}, {self.lhs.codegen()})'
         return self.indent(indent_level, expr)
 
 
@@ -90,14 +90,15 @@ def translator(function_name: str, fn: callable):
     ss.write(f'  def test_{fn.__name__}(self):\n')
     for a in assertions:
         print(a.codegen(indent_level=2), file=ss)
-    code = ss.getvalue()
+    # 将测试对齐到原始位置
+    code = '\n' * (inspect.getsourcelines(fn)[1] - 4) + ss.getvalue()
     # 在调用栈上搜索注入位置
     local = None
     for fi in inspect.getouterframes(inspect.currentframe()):
         if fi.filename == inspect.getfile(fn):
             local = fi.frame.f_locals
     # 编译并注入原始位置
-    test_class = compile(code, inspect.getsource(fn), mode='exec')
+    test_class = compile(code, inspect.getsourcefile(fn), mode='exec')
     exec(test_class, local, local)
 
 
