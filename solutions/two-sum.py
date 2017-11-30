@@ -2,6 +2,7 @@
 
 from leetcode import *
 import collections
+from typing import Union
 
 Pair = collections.namedtuple('Pair', ['position', 'value'])
 
@@ -15,6 +16,7 @@ class Solution:
 
     def twoSum(self, nums: [int], target: int) -> [int]:
         """
+        排序 + 二分搜索
         """
         n = len(nums)
         xs = [Pair(i, x) for i, x in enumerate(nums)]
@@ -29,7 +31,7 @@ class Solution:
                 else:
                     return [another, x.position]
 
-    def binary_search(self, x: int, xs: [Pair], begin: int, end: int):
+    def binary_search(self, x: int, xs: [Pair], begin: int, end: int) -> Union[int, None]:
         if not 0 <= begin < end <= len(xs):
             return None
         mid = (begin + end) // 2
@@ -43,6 +45,6 @@ class Solution:
 
 
 @Solution.test.twoSum
-def example(fn):
+def examples(fn):
     require(fn([2, 7, 11, 15], 9) == [0, 1])
     require(fn([3, 2, 4], 6) == [1, 2])
