@@ -1,0 +1,8 @@
+[run]
+branch = True
+include =
+    leetcode/*.py
+    solutions/*.py
+    test/solutions.py
+omit =
+    solutions/__init__.py
